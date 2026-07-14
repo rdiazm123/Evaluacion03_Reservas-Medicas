@@ -1,17 +1,57 @@
 body {
-  background-color: #121824; /* Fondo azul oscuro profundo para alto contraste */
-  color: #e2e8f0; /* Texto claro */
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f0f7f7; /* Fondo pastel verde agua muy suave */
+  color: #2d3748; /* Texto oscuro legible */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .card {
-  border-radius: 15px;
+  border-radius: 16px;
+  border: none;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .btn {
   border-radius: 20px;
+  font-weight: 600;
 }
 
-.navbar-brand {
+/* Botón Azul */
+.btn-primary {
+  background-color: #3182ce;
+  border-color: #3182ce;
+}
+.btn-primary:hover {
+  background-color: #2b6cb0;
+  border-color: #2b6cb0;
+}
+
+/* Botón Verde Agua / Teal */
+.btn-success {
+  background-color: #319795;
+  border-color: #319795;
+}
+.btn-success:hover {
+  background-color: #2c7a7b;
+  border-color: #2c7a7b;
+}
+
+/* Estilo personalizado para el Navbar (Verde agua pastel) */
+.navbar-custom {
+  background-color: #e6fffa !important; /* Verde agua pastel claro */
+  border-bottom: 2px solid #b2f5ea;
+}
+
+.navbar-custom .navbar-brand {
+  color: #234e52 !important; /* Texto verde agua oscuro */
   font-weight: bold;
+}
+
+.navbar-custom .nav-link {
+  color: #2d3748 !important;
+  font-weight: 500;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #319795 !important; /* Verde agua al pasar el mouse */
 }
