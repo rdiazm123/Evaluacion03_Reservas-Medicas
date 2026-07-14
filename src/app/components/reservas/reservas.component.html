@@ -1,1 +1,205 @@
-<p>reservas works!</p>
+<div class="container mt-4">
+
+  <div class="card shadow">
+
+    <div class="card-header bg-primary text-white text-center">
+
+      <h2>🏥 Reserva de Hora Médica</h2>
+
+      <p class="mb-0">
+        Seleccione una especialidad y fecha para agendar su atención
+      </p>
+
+    </div>
+
+
+    <div class="card-body">
+
+
+      <form #formReserva="ngForm" (ngSubmit)="guardar()">
+
+
+        <div class="mb-3">
+
+          <label class="form-label">
+            Nombre del paciente
+          </label>
+
+         <input
+	type="text"
+	class="form-control"
+	placeholder="Ingrese nombre completo"
+	name="nombre"
+	[(ngModel)]="reserva.nombre"
+	maxlength="100"
+	required>
+
+        </div>
+
+
+
+        <div class="mb-3">
+
+          <label class="form-label">
+            Especialidad médica
+          </label>
+
+
+          <select
+          class="form-select"
+          name="especialidad"
+          [(ngModel)]="reserva.especialidad"
+          required>
+
+
+            <option value="">
+              Seleccione una especialidad
+            </option>
+
+            <option>
+              Medicina General
+            </option>
+
+            <option>
+              Pediatría
+            </option>
+
+            <option>
+              Cardiología
+            </option>
+
+            <option>
+              Traumatología
+            </option>
+
+            <option>
+              Dermatología
+            </option>
+
+            <option>
+              Odontología
+            </option>
+
+
+          </select>
+
+
+        </div>
+
+
+
+
+        <div class="mb-3">
+
+          <label class="form-label">
+            Fecha de atención
+          </label>
+
+
+          <input
+          type="date"
+          class="form-control"
+          name="fecha"
+          [(ngModel)]="reserva.fecha"
+          required>
+
+
+        </div>
+
+
+
+
+        <button
+        class="btn btn-success w-100"
+        [disabled]="formReserva.invalid">
+
+          Confirmar Reserva
+
+        </button>
+
+
+      </form>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="card shadow mt-4">
+
+    <div class="card-header bg-info text-white">
+
+      <h3>
+        📋 Mis Reservas Médicas
+      </h3>
+
+    </div>
+
+
+    <div class="card-body">
+
+
+      <table class="table table-striped">
+
+        <thead class="table-primary">
+
+          <tr>
+
+            <th>Paciente</th>
+
+            <th>Especialidad</th>
+
+            <th>Fecha</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+          <tr *ngFor="let r of reservas">
+
+            <td>
+              {{r.nombre}}
+            </td>
+
+            <td>
+              {{r.especialidad}}
+            </td>
+
+            <td>
+              {{r.fecha}}
+            </td>
+
+          </tr>
+
+
+        </tbody>
+
+
+      </table>
+
+
+      <div 
+      *ngIf="reservas.length === 0"
+      class="alert alert-warning text-center">
+
+        No existen reservas registradas.
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
