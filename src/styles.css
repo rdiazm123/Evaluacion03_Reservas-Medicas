@@ -1,27 +1,17 @@
 body {
-
-  background-color: #f4f8fb;
+  background-color: #121824; /* Fondo azul oscuro profundo para alto contraste */
+  color: #e2e8f0; /* Texto claro */
   font-family: Arial, Helvetica, sans-serif;
-
 }
-
 
 .card {
-
   border-radius: 15px;
-
 }
-
 
 .btn {
-
   border-radius: 20px;
-
 }
 
-
 .navbar-brand {
-
   font-weight: bold;
-
 }

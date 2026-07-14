@@ -1,26 +1,116 @@
 <div class="container mt-5">
-  <div class="card shadow">
-    <div class="card-header bg-primary text-white">
-      <h3 class="mb-0">📅 Reservar Hora Médica</h3>
+  <h2 class="text-warning mb-4">📅 Reserva de Hora Médica</h2>
+
+  <div class="row">
+    <!-- Formulario de Reserva -->
+    <div class="col-md-5 mb-4">
+      <div class="card bg-dark text-warning p-4 shadow-sm">
+        <form #formReserva="ngForm" (ngSubmit)="enviar(formReserva)">
+          
+          <!-- Nombre -->
+          <div class="mb-3">
+            <label class="form-label text-light">Nombre del Paciente</label>
+            <input 
+              type="text" 
+              class="form-control bg-secondary text-light border-0" 
+              name="nombre" 
+              [(ngModel)]="nombre" 
+              required 
+              minlength="3"
+              #nombreRef="ngModel"
+              [class.is-invalid]="nombreRef.invalid && nombreRef.touched"
+              placeholder="Ingrese su nombre completo"
+            >
+            <div *ngIf="nombreRef.invalid && nombreRef.touched" class="text-danger mt-1">
+              <small *ngIf="nombreRef.errors?.['required']">El nombre es obligatorio.</small>
+              <small *ngIf="nombreRef.errors?.['minlength']">Mínimo 3 caracteres.</small>
+            </div>
+          </div>
+
+          <!-- Especialidad -->
+          <div class="mb-3">
+            <label class="form-label text-light">Especialidad Médica</label>
+            <select 
+              class="form-select bg-secondary text-light border-0" 
+              name="especialidad" 
+              [(ngModel)]="especialidad" 
+              required 
+              #especialidadRef="ngModel"
+              [class.is-invalid]="especialidadRef.invalid && especialidadRef.touched"
+            >
+              <option value="" disabled selected>Seleccione una especialidad</option>
+              <option value="Pediatría">Pediatría 👶</option>
+              <option value="Cardiología">Cardiología 🫀</option>
+              <option value="Medicina General">Medicina General 🩺</option>
+              <option value="Dermatología">Dermatología 🔬</option>
+              <option value="Traumatología">Traumatología 🦴</option>
+            </select>
+            <div *ngIf="especialidadRef.invalid && especialidadRef.touched" class="text-danger mt-1">
+              <small>Debe seleccionar una especialidad.</small>
+            </div>
+          </div>
+
+          <!-- Fecha -->
+          <div class="mb-3">
+            <label class="form-label text-light">Fecha de la Cita</label>
+            <input 
+              type="date" 
+              class="form-control bg-secondary text-light border-0" 
+              name="fecha" 
+              [(ngModel)]="fecha" 
+              [min]="fechaActual"
+              required 
+              #fechaRef="ngModel"
+              [class.is-invalid]="fechaRef.invalid && fechaRef.touched"
+            >
+            <div *ngIf="fechaRef.invalid && fechaRef.touched" class="text-danger mt-1">
+              <small *ngIf="fechaRef.errors?.['required']">La fecha es obligatoria.</small>
+            </div>
+          </div>
+
+          <!-- Botón de Enviar -->
+          <button class="btn btn-warning w-100 py-2 fw-semibold mt-3" type="submit" [disabled]="formReserva.invalid">
+            Confirmar Reserva
+          </button>
+        </form>
+      </div>
     </div>
-    <div class="card-body">
-      <form #reservaForm="ngForm">
-        <div class="mb-3">
-          <label for="fecha" class="form-label">Seleccione la fecha de su cita:</label>
-          <input
-            id="fecha"
-            type="date"
-            class="form-control"
-            name="fecha"
-            [(ngModel)]="reserva.fecha"
-            [min]="fechaActual"
-            required
-          />
+
+    <!-- Visualización de Reservas Guardadas -->
+    <div class="col-md-7 mb-4">
+      <div class="card bg-dark text-warning p-4 shadow-sm h-100">
+        <h4 class="mb-3">🏥 Historial de Reservas Realizadas</h4>
+        
+        <div *ngIf="datosGuardados.length === 0" class="text-light text-center my-auto">
+          <p class="mb-0 fs-5">No hay reservas registradas actualmente.</p>
+          <small class="text-muted">Utilice el formulario de la izquierda para agendar una cita.</small>
         </div>
-        <button type="submit" class="btn btn-success" [disabled]="!reservaForm.valid">
-          Confirmar Reserva
-        </button>
-      </form>
+
+        <div *ngIf="datosGuardados.length > 0" class="table-responsive">
+          <table class="table table-dark table-hover table-striped text-warning align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Paciente</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Fecha</th>
+                <th scope="col" class="text-center">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let reserva of datosGuardados; let i = index">
+                <td class="text-light">{{ reserva.nombre }}</td>
+                <td>{{ reserva.especialidad }}</td>
+                <td>{{ reserva.fecha }}</td>
+                <td class="text-center">
+                  <button class="btn btn-danger btn-sm rounded-pill" (click)="eliminarReserva(i)">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
